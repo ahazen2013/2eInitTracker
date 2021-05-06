@@ -26,10 +26,28 @@ public class NewBehaviourScript : MonoBehaviour
     {
         if (Input.GetKeyDown("return"))
         {
+            Random.InitState((int)System.DateTime.Now.Ticks);
             //gameObject.transform.position -= temp;
             initRoll = int.Parse(init.text);
-            initRoll = UnityEngine.Random.Range(1, 21) - initRoll;
-            text.text = pName.text + " " + initRoll.ToString();
+            if (pName.text.EndsWith("adv")) {
+                int initRoll1 = UnityEngine.Random.Range(1, 21);
+                int initRoll2 = UnityEngine.Random.Range(1, 21);
+
+                if (initRoll2 > initRoll1) {
+                    initRoll = initRoll2 + initRoll;
+                }
+
+                else {
+                    initRoll = initRoll1 + initRoll;
+                }
+
+                text.text = pName.text + " " + initRoll.ToString();
+            }
+            else {
+                initRoll = UnityEngine.Random.Range(1, 21) + initRoll;
+                text.text = pName.text + " " + initRoll.ToString();
+            }
+            
             //temp = new Vector3(20 * (initRoll + 2), 0.0f, 0.0f);
             //gameObject.transform.position += temp;
         }
